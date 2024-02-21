@@ -4,4 +4,4 @@
 /ShopOnlineCore/obj
 /ShopOnlineCore/bin
 /ShopOnlineAPI/Properties/PublishProfiles
-/ShopOnlineCore/appsettings.Development.json
+/ShopOnlineAPI/appsettings.Development.json
