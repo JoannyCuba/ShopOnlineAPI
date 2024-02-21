@@ -1,0 +1,7 @@
+/.vs
+/ShopOnlineAPI/bin
+/ShopOnlineAPI/obj
+/ShopOnlineCore/obj
+/ShopOnlineCore/bin
+/ShopOnlineAPI/Properties/PublishProfiles
+/ShopOnlineCore/appsettings.Development.json
