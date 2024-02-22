@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopOnlineAPI.Data;
 
@@ -11,9 +12,10 @@ using ShopOnlineAPI.Data;
 namespace ShopOnlineAPI.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    partial class SqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240221233406_AddingTrace")]
+    partial class AddingTrace
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,6 @@ namespace ShopOnlineAPI.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -102,43 +101,6 @@ namespace ShopOnlineAPI.Migrations
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("ShopOnlineAPI.Models.SaleModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ClientModelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProductModelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("QuantitySold")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("SaleDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientModelId");
-
-                    b.HasIndex("ProductModelId");
-
-                    b.ToTable("Sales", (string)null);
-                });
-
             modelBuilder.Entity("ShopOnlineAPI.Models.Trace", b =>
                 {
                     b.Property<Guid>("Id")
@@ -187,37 +149,14 @@ namespace ShopOnlineAPI.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ShopOnlineAPI.Models.SaleModel", b =>
-                {
-                    b.HasOne("ShopOnlineAPI.Models.ClientModel", "Client")
-                        .WithMany("Sales")
-                        .HasForeignKey("ClientModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShopOnlineAPI.Models.ProductModel", "Product")
-                        .WithMany("Sales")
-                        .HasForeignKey("ProductModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("ShopOnlineAPI.Models.ClientModel", b =>
                 {
                     b.Navigation("Products");
-
-                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("ShopOnlineAPI.Models.ProductModel", b =>
                 {
                     b.Navigation("Clients");
-
-                    b.Navigation("Sales");
                 });
 #pragma warning restore 612, 618
         }
