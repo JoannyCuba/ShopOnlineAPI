@@ -28,9 +28,7 @@ namespace ShopOnlineCore.UseCase
         }
         public Client GetById(string id)
         {
-            var result = _unitOfWork.Client.FindOne(id);
-            if (result == null)
-                throw new NotFoundException("Client not found.");
+            var result = _unitOfWork.Client.FindOne(id) ?? throw new NotFoundException("Client not found.");
             _handlerEvent.RealeaseEvent(Constants.EventCore.ReadClient, new object[] { result });
             return result;
         }
@@ -59,9 +57,7 @@ namespace ShopOnlineCore.UseCase
             if (string.IsNullOrEmpty(client.Id))
                 throw new ArgumentNullException("Id", "Id is required.");
             client.Validate();
-            var model = _unitOfWork.Client.FindOne(client.Id);
-            if (model == null)
-                throw new NotFoundException("Client not found.");
+            _ = _unitOfWork.Client.FindOne(client.Id) ?? throw new NotFoundException("Client not found.");
             _unitOfWork.Client.Update(client);
             _unitOfWork.Save();
             _handlerEvent.RealeaseEvent(Constants.EventCore.UpdateClient, new object[] { client });
@@ -71,10 +67,7 @@ namespace ShopOnlineCore.UseCase
             _unitOfWork.BeginTransaction();
             try
             {
-                var model = _unitOfWork.Client.FindOne(id);
-                if (model == null)
-                    throw new NotFoundException("Client not found.");
-
+                var model = _unitOfWork.Client.FindOne(id) ?? throw new NotFoundException("Client not found.");
                 _unitOfWork.Client.Remove(model);
                 _unitOfWork.Save();
                 _handlerEvent.RealeaseEvent(Constants.EventCore.DeleteClient, new object[] { model });

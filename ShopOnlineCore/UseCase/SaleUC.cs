@@ -11,13 +11,13 @@ namespace ShopOnlineCore.UseCase
 {
     public class SaleUC
     {
-        private IUnitOfWork _unitOfWork;
-        private EventHandlerCore _handlerEvent = new();
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly EventHandlerCore _handlerEvent = new();
         public SaleUC(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public List<Sale> List(object search = null, int page = 1, int itemPerPage = 25)
+        public List<Sale> List(object? search = null, int page = 1, int itemPerPage = 25)
         {
             var result = _unitOfWork.Sale.Find(search, page, itemPerPage);
             _handlerEvent.RealeaseEvent(Constants.EventCore.ReadSale, new object[] { result });
@@ -28,7 +28,6 @@ namespace ShopOnlineCore.UseCase
             _unitOfWork.BeginTransaction();
             try
             {
-                //sale.Id = BaseEntity.CreateUUID();
                 _unitOfWork.Sale.Add(sale);
                 _unitOfWork.Save();
                 _handlerEvent.RealeaseEvent(Constants.EventCore.AddSale, new object[] { sale });
@@ -37,7 +36,6 @@ namespace ShopOnlineCore.UseCase
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

@@ -10,10 +10,10 @@ namespace ShopOnlineAPI.Infrastructure.Repositories
 {
     public class SaleRepository : IRepository<Sale>
     {
-        private DbSet<Models.SaleModel> dbSet;
+        private readonly DbSet<SaleModel> dbSet;
         public SaleRepository(ApplicationDbContext context)
         {
-            dbSet = context.Set<Models.SaleModel>();
+            dbSet = context.Set<SaleModel>();
         }
         public void Add(Sale entity)
         {
@@ -28,7 +28,7 @@ namespace ShopOnlineAPI.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public List<Sale> Find(object search = null, int page = 1, int itemPerPage = 25)
+        public List<Sale> Find(object? search = null, int page = 1, int itemPerPage = 25)
         {
             FilterDto filter = search == null ? new FilterDto()
             {

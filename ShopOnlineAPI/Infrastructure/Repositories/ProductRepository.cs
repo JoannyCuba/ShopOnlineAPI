@@ -32,7 +32,7 @@ namespace ShopOnlineAPI.Infrastructure.Repositories
                             && x.DeletedAt == null).Count();
         }
 
-        public List<Product> Find(object search = null, int page = 1, int itemPerPage = 25)
+        public List<Product> Find(object? search = null, int page = 1, int itemPerPage = 25)
         {
             FilterDto filter = search == null ? new FilterDto()
             {
