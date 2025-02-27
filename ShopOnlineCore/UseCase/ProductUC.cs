@@ -1,11 +1,6 @@
 ﻿using ShopOnlineCore.Entity;
 using ShopOnlineCore.Interfaces;
 using ShopOnlineCore.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopOnlineCore.UseCase
 {
@@ -18,7 +13,7 @@ namespace ShopOnlineCore.UseCase
         {
             _unitOfWork = unitOfWork;
         }
-        public List<Product> List(object search = null, int page = 1, int itemPerPage = 25)
+        public List<Product> List(object? search = null, int page = 1, int itemPerPage = 25)
         {
             var result = _unitOfWork.Product.Find(search, page, itemPerPage);
             _handlerEvent.RealeaseEvent(Constants.EventCore.ReadProduct, new object[] { result });
@@ -54,9 +49,7 @@ namespace ShopOnlineCore.UseCase
         {
             if (string.IsNullOrEmpty(product.Id))
                 throw new ArgumentNullException("Id", "Id is required.");
-            var model = _unitOfWork.Product.FindOne(product.Id);
-            if (model == null)
-                throw new NotFoundException("Product not found.");
+            var model = _unitOfWork.Product.FindOne(product.Id) ?? throw new NotFoundException("Product not found.");
             _unitOfWork.Product.Update(product);
             _unitOfWork.Save();
             _handlerEvent.RealeaseEvent(Constants.EventCore.UpdateProduct, new object[] { product });

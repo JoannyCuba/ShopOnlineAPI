@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShopOnlineAPI.Models;
-using System.Reflection.Emit;
 
 namespace ShopOnlineAPI.Data
 {
