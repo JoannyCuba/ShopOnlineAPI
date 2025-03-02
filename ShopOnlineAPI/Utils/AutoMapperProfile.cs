@@ -32,7 +32,6 @@ namespace ShopOnlineAPI.Utils
         {
             CreateMap<ClientModel, Client>();
             CreateMap<Client, ClientDto>().ReverseMap();
-                //.ForMember(dest => dest.Products, opt => opt.Ignore());
             CreateMap<Client, UserInfo>().ReverseMap();
 
             CreateMap<Client, ClientModel>()

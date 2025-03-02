@@ -23,7 +23,6 @@ namespace ShopOnlineAPI.Utils
             var claims = new[]
             {
                  new Claim(ClaimTypes.Name, userId)
-                // Puedes agregar más claims según tus necesidades
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
@@ -33,7 +32,7 @@ namespace ShopOnlineAPI.Utils
                 jwtIssuer,
                 jwtAudience,
                 claims,
-                expires: DateTime.Now.AddHours(1), // Configura la expiración según tus necesidades
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds
             );
 

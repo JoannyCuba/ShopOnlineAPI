@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ShopOnlineAPI.Data;
 using ShopOnlineAPI.Infrastructure.Dtos;
 using ShopOnlineAPI.Models;
 using ShopOnlineAPI.Utils;
