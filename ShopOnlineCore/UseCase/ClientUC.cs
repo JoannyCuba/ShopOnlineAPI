@@ -1,26 +1,20 @@
 ﻿using ShopOnlineCore.Entity;
 using ShopOnlineCore.Interfaces;
 using ShopOnlineCore.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopOnlineCore.UseCase
 {
     public class ClientUC
     {
-        private IUnitOfWork _unitOfWork;
-        private EventHandlerCore _handlerEvent = new();
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly EventHandlerCore _handlerEvent = new();
 
         public ClientUC(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public List<Client> List(object search = null, int page = 1, int itemPerPage = 25)
+        public List<Client> List(object? search = null, int page = 1, int itemPerPage = 25)
         {
             var result = _unitOfWork.Client.Find(search, page, itemPerPage);
             _handlerEvent.RealeaseEvent(Constants.EventCore.ReadClient, new object[] { result });
