@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using ShopOnlineAPI.Infrastructure.Dtos;
 using ShopOnlineAPI.Models;
 using ShopOnlineCore.Entity;
@@ -28,6 +28,33 @@ namespace ShopOnlineAPI.Utils
             }
 
         }
+        /// <summary>
+        /// Initializes a new instance of the AutoMapperProfile class and configures type mappings between various client and sale models.
+        /// </summary>
+        /// <remarks>
+        /// This constructor sets up the following mappings:
+        /// <list type="bullet">
+        /// <item>
+        /// Maps <c>ClientModel</c> to <c>Client</c>.
+        /// </item>
+        /// <item>
+        /// Configures bidirectional mappings for <c>Client</c> with <c>ClientDto</c> and <c>UserInfo</c>.
+        /// </item>
+        /// <item>
+        /// Maps <c>Client</c> to <c>ClientModel</c> with custom member mappings:
+        ///   - Generates a default UUID for <c>Id</c> if absent.
+        ///   - Ignores <c>CreatedAt</c> and <c>Products</c>.
+        ///   - Supports reverse mapping.
+        /// </item>
+        /// <item>
+        /// Maps <c>Sale</c> to <c>SaleModel</c> with specific member configurations:
+        ///   - Generates a default UUID for <c>Id</c> if needed.
+        ///   - Maps <c>Client</c> to <c>ClientModelId</c> and <c>Product</c> to <c>ProductModelId</c>.
+        ///   - Ignores <c>Client</c> and <c>Product</c>.
+        ///   - Enables bidirectional mapping.
+        /// </item>
+        /// </list>
+        /// </remarks>
         public AutoMapperProfile()
         {
             CreateMap<ClientModel, Client>();

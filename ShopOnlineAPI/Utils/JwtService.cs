@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -14,6 +14,11 @@ namespace ShopOnlineAPI.Utils
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Generates a JSON Web Token (JWT) for the specified user.
+        /// </summary>
+        /// <param name="userId">The unique identifier of the user for whom the token is created.</param>
+        /// <returns>A serialized JWT token that is valid for one hour.</returns>
         public string GenerateToken(string userId)
         {
             var jwtSecret = _configuration["Jwt:Secret"];
